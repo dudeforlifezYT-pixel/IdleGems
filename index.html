@@ -2,84 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#080b18" />
-  <meta name="description" content="Idle Gems — mine, automate, refine, and ascend through a glittering incremental adventure." />
-  <title>Idle Gems</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#090b12" />
+  <meta name="description" content="Level Up — an incremental game about turning one click into impossible amounts of XP." />
+  <title>Level Up</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="usability.css?v=sidebar-redesign-2" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=level-up-1" />
 </head>
 <body>
-  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
-  <div id="toast" class="toast"></div>
-  <header class="topbar">
-    <a class="brand" href="#"><span class="brand-gem">◆</span><span>Idle Gems</span></a>
-    <div class="top-actions">
-      <button class="icon-button" id="soundBtn" aria-label="Toggle sound">♪</button>
-      <button class="icon-button" id="saveBtn" aria-label="Save game">↧</button>
-      <button class="icon-button" id="settingsBtn" aria-label="Settings">⚙</button>
-    </div>
+  <div class="noise"></div><div class="glow"></div>
+  <header>
+    <a class="logo" href="#"><span>▲</span> LEVEL UP</a>
+    <div class="header-stats"><div><small>LEVEL</small><b id="headerLevel">1</b></div><div><small>XP / CLICK</small><b id="headerPower">1</b></div><div><small>XP / SEC</small><b id="headerRate">0</b></div></div>
+    <div class="header-actions"><button id="saveBtn" title="Save">↓</button><button id="settingsBtn" title="Settings">⚙</button></div>
   </header>
 
-  <main class="game-shell">
-    <section class="hero-card panel">
-      <div class="hero-copy">
-        <div class="eyebrow"><span class="pulse-dot"></span> CRYSTAL CAVERN · DEPTH <span id="depthLabel">1</span></div>
-        <h1>Your gem empire<br><span>starts with one strike.</span></h1>
-        <p>Mine rare crystals, hire crews, build machines, and uncover the heart of the cavern.</p>
-        <div class="stat-row">
-          <div><span>Total mined</span><strong id="totalMined">0</strong></div>
-          <div><span>Best gem</span><strong id="bestGem">Quartz</strong></div>
-          <div><span>Play time</span><strong id="playTime">0m</strong></div>
+  <main>
+    <aside class="sidebar">
+      <div class="profile"><div class="level-ring"><span>LV.</span><b id="sideLevel">1</b></div><div><small>CURRENT RANK</small><strong id="rankName">Rookie</strong></div></div>
+      <nav>
+        <button class="nav-btn active" data-page="train"><i>⌁</i><span><b>Train</b><small>Earn XP & level up</small></span></button>
+        <button class="nav-btn locked" data-page="skills" data-unlock="3"><i>✦</i><span><b>Skills</b><small id="skillsNavText">Unlocks at level 3</small></span></button>
+        <button class="nav-btn locked" data-page="automation" data-unlock="5"><i>»</i><span><b>Automation</b><small id="automationNavText">Unlocks at level 5</small></span></button>
+        <button class="nav-btn locked" data-page="challenges" data-unlock="10"><i>◆</i><span><b>Challenges</b><small id="challengesNavText">Unlocks at level 10</small></span></button>
+        <button class="nav-btn locked" data-page="prestige" data-unlock="20"><i>∞</i><span><b>Prestige</b><small id="prestigeNavText">Unlocks at level 20</small></span></button>
+      </nav>
+      <div class="next-unlock"><small>NEXT FEATURE</small><strong id="nextUnlockName">Skills</strong><span id="nextUnlockLevel">Reach level 3</span><div class="mini-progress"><i id="unlockProgress"></i></div></div>
+    </aside>
+
+    <section class="content">
+      <section id="train" class="page active">
+        <div class="hero-panel">
+          <div class="hero-top"><div><span class="overline">TRAINING PROGRESS</span><h1>Level <span id="mainLevel">1</span></h1></div><div class="rank-pill" id="rankPill">ROOKIE</div></div>
+          <div class="xp-readout"><span id="currentXp">0</span><small> / <span id="requiredXp">5</span> XP</small></div>
+          <div class="xp-bar"><i id="xpBar"></i><span id="xpPercent">0%</span></div>
+          <div class="gain-row"><span>Click power <b>+<span id="clickPower">1</span> XP</b></span><span>Passive gain <b>+<span id="passivePower">0</span> XP/s</b></span><span>Lifetime XP <b id="lifetimeXp">0</b></span></div>
         </div>
-      </div>
-      <div class="mine-zone">
-        <div class="combo" id="combo">x1 combo</div>
-        <button id="mineButton" class="crystal-button" aria-label="Mine gems">
-          <span class="crystal-glow"></span><span class="crystal">◆</span>
-          <span class="mine-label">TAP TO MINE</span>
-        </button>
-        <div class="mine-power">+<span id="clickPower">1</span> gems per strike <span class="key-hint">SPACE</span></div>
-      </div>
+
+        <div class="click-area">
+          <div class="click-rings"><span></span><span></span><span></span></div>
+          <button id="xpButton"><span class="button-shine"></span><small>CLICK TO GAIN</small><strong>XP</strong><em>+<span id="buttonGain">1</span></em></button>
+          <p>Click the button or press <kbd>SPACE</kbd></p>
+        </div>
+
+        <div class="lower-grid">
+          <div class="panel recent-panel"><div class="panel-head"><div><span class="overline">PROGRESSION</span><h2>Level Rewards</h2></div></div><div id="rewardTrack" class="reward-track"></div></div>
+          <div class="panel stats-panel"><div class="panel-head"><div><span class="overline">SESSION</span><h2>Statistics</h2></div></div><div class="stats-list"><div><span>Total clicks</span><b id="totalClicks">0</b></div><div><span>Critical clicks</span><b id="criticalClicks">0</b></div><div><span>Time played</span><b id="timePlayed">0m</b></div><div><span>Highest level</span><b id="highestLevel">1</b></div></div></div>
+        </div>
+      </section>
+
+      <section id="skills" class="page"><div class="page-heading"><span class="overline">SPEND XP TO GROW</span><h1>Skills</h1><p>Purchased skills reset on prestige, but their power compounds fast.</p></div><div id="skillGrid" class="card-grid"></div></section>
+      <section id="automation" class="page"><div class="page-heading"><span class="overline">PROGRESS WHILE IDLE</span><h1>Automation</h1><p>Build a training system that earns XP every second—even while you are away.</p></div><div id="automationGrid" class="card-grid"></div></section>
+      <section id="challenges" class="page"><div class="page-heading"><span class="overline">PERMANENT REWARDS</span><h1>Challenges</h1><p>Complete milestones for permanent bonuses that survive prestige.</p></div><div id="challengeGrid" class="challenge-grid"></div></section>
+      <section id="prestige" class="page"><div class="prestige-panel"><div class="prestige-symbol">∞</div><span class="overline">BREAK YOUR LIMIT</span><h1>Prestige</h1><p>Reset your level, XP, skills, and automation to earn permanent Potential. Each Potential point multiplies all XP by 25%.</p><div class="prestige-info"><div><small>YOU WILL EARN</small><strong><span id="potentialGain">0</span> ◈</strong></div><div><small>CURRENT BOOST</small><strong id="potentialBoost">×1.00</strong></div></div><button id="prestigeBtn" disabled>Reach level 20 to prestige</button><small class="warning">Challenges, achievements, and lifetime stats are kept.</small></div></section>
     </section>
-
-    <section class="resource-bar panel" aria-live="polite">
-      <div class="main-currency"><span class="mini-gem">◆</span><div><strong id="gems">0</strong><span>GEMS</span></div></div>
-      <div class="rate"><span>PRODUCTION</span><strong><span id="gps">0</span> / sec</strong></div>
-      <div class="level-wrap"><div class="level-head"><span>Cavern Level <b id="level">1</b> · <b id="discoveryBonus">+0%</b> discovery boost</span><span id="levelProgressText">0 / 60</span></div><div class="progress"><i id="levelProgress"></i></div></div>
-    </section>
-
-    <nav class="tabs" aria-label="Game sections">
-      <div class="nav-label">EXPEDITION</div>
-      <button class="tab active" data-tab="mine"><span class="tab-icon">◆</span><span class="tab-copy"><b>Mine</b><small>Collection & caverns</small></span></button>
-      <button class="tab" data-tab="workers"><span class="tab-icon">⛏</span><span class="tab-copy"><b>Workers</b><small>Automate production</small></span></button>
-      <button class="tab" data-tab="upgrades"><span class="tab-icon">⌁</span><span class="tab-copy"><b>Upgrades</b><small>Boost your mine</small></span></button>
-      <div class="nav-label nav-label-second">PROGRESS</div>
-      <button class="tab" data-tab="achievements"><span class="tab-icon">✓</span><span class="tab-copy"><b>Achievements <span id="achievementDot" class="notification hidden"></span></b><small>Milestones & rewards</small></span></button>
-      <button class="tab ascend-tab" data-tab="ascend"><span class="tab-icon">✦</span><span class="tab-copy"><b>Ascend</b><small>Restart even stronger</small></span></button>
-      <div class="rail-tip"><span>TIP</span><p>Hold a combo to mine up to 5× faster.</p></div>
-    </nav>
-
-    <section id="mine" class="tab-panel active">
-      <div class="section-title"><div><span class="eyebrow">DISCOVERIES</span><h2>Gem Collection</h2></div><span id="collectionCount">1 / 8 found</span></div>
-      <div id="gemCollection" class="gem-grid"></div>
-      <div class="depth-card panel">
-        <div class="depth-icon">⌄</div><div class="depth-info"><span>NEXT EXPEDITION</span><strong id="nextCavern">Amethyst Hollow</strong><small id="unlockText">Reach cavern level 5</small></div>
-        <div class="depth-progress"><div class="progress"><i id="cavernProgress"></i></div></div>
-      </div>
-    </section>
-
-    <section id="workers" class="tab-panel"><div class="section-title shop-title"><div><span class="eyebrow">AUTOMATION</span><h2>Mining Crew</h2></div><div class="buy-modes" aria-label="Purchase quantity"><span>BUY</span><button class="buy-mode active" data-mode="1">1</button><button class="buy-mode" data-mode="10">10</button><button class="buy-mode" data-mode="max">MAX</button></div></div><div id="workerList" class="shop-grid"></div></section>
-    <section id="upgrades" class="tab-panel"><div class="section-title shop-title"><div><span class="eyebrow">RESEARCH</span><h2>Power Up</h2></div><div class="buy-modes" aria-label="Purchase quantity"><span>BUY</span><button class="buy-mode active" data-mode="1">1</button><button class="buy-mode" data-mode="10">10</button><button class="buy-mode" data-mode="max">MAX</button></div></div><div id="upgradeList" class="shop-grid"></div></section>
-    <section id="achievements" class="tab-panel"><div class="section-title"><div><span class="eyebrow">MILESTONES</span><h2>Achievements</h2></div><span id="achievementCount">0 / 8 complete</span></div><div id="achievementList" class="achievement-grid"></div></section>
-    <section id="ascend" class="tab-panel"><div class="ascend-card panel"><span class="ascend-orbit">✦</span><div class="eyebrow">DEEPER THAN BEFORE</div><h2>Crystal Ascension</h2><p>Collapse your mine and begin again with permanent Prismatic Shards. Every shard boosts all gem production by 12% forever.</p><div class="ascend-math"><div><span>You will receive</span><strong><b id="shardsGain">0</b> ✦</strong></div><div><span>Current permanent boost</span><strong id="ascendBoost">+0%</strong></div></div><button id="ascendBtn" class="primary-button" disabled>Ascend at 500K expedition gems</button><small>Workers, upgrades, gems, and cavern level will reset.</small></div></section>
   </main>
 
-  <dialog id="settingsModal"><form method="dialog"><div class="modal-head"><h2>Settings</h2><button class="icon-button">×</button></div><label class="setting-row"><span><b>Compact numbers</b><small>Display 1,000 as 1K</small></span><input id="compactToggle" type="checkbox" checked></label><label class="setting-row"><span><b>Reduced motion</b><small>Limit visual effects</small></span><input id="motionToggle" type="checkbox"></label><button type="button" id="exportBtn" class="secondary-button">Export save</button><button type="button" id="importBtn" class="secondary-button">Import save</button><button type="button" id="resetBtn" class="danger-button">Reset all progress</button></form></dialog>
-  <footer>Idle Gems · Your progress saves automatically</footer>
-  <script src="game.js"></script>
+  <div id="levelModal" class="level-modal"><div><span>LEVEL UP</span><strong id="modalLevel">2</strong><p id="modalReward">Click power increased!</p></div></div>
+  <div id="toast" class="toast"></div>
+  <dialog id="settingsModal"><form method="dialog"><div class="dialog-head"><h2>Settings</h2><button>×</button></div><label><span><b>Compact numbers</b><small>Show 1,000 as 1K</small></span><input id="compactToggle" type="checkbox" checked></label><label><span><b>Reduced motion</b><small>Limit visual effects</small></span><input id="motionToggle" type="checkbox"></label><button type="button" id="exportBtn" class="dialog-btn">Export save</button><button type="button" id="importBtn" class="dialog-btn">Import save</button><button type="button" id="resetBtn" class="dialog-btn danger">Reset progress</button></form></dialog>
+  <script src="game.js?v=level-up-1"></script>
 </body>
 </html>
