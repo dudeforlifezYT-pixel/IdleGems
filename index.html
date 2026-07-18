@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080b18" />
+  <meta name="description" content="Idle Gems — mine, automate, refine, and ascend through a glittering incremental adventure." />
+  <title>Idle Gems</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <div id="toast" class="toast"></div>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-gem">◆</span><span>Idle Gems</span></a>
+    <div class="top-actions">
+      <button class="icon-button" id="soundBtn" aria-label="Toggle sound">♪</button>
+      <button class="icon-button" id="saveBtn" aria-label="Save game">↧</button>
+      <button class="icon-button" id="settingsBtn" aria-label="Settings">⚙</button>
+    </div>
+  </header>
+
+  <main class="game-shell">
+    <section class="hero-card panel">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse-dot"></span> CRYSTAL CAVERN · DEPTH <span id="depthLabel">1</span></div>
+        <h1>Your gem empire<br><span>starts with one strike.</span></h1>
+        <p>Mine rare crystals, hire crews, build machines, and uncover the heart of the cavern.</p>
+        <div class="stat-row">
+          <div><span>Total mined</span><strong id="totalMined">0</strong></div>
+          <div><span>Best gem</span><strong id="bestGem">Quartz</strong></div>
+          <div><span>Play time</span><strong id="playTime">0m</strong></div>
+        </div>
+      </div>
+      <div class="mine-zone">
+        <div class="combo" id="combo">x1 combo</div>
+        <button id="mineButton" class="crystal-button" aria-label="Mine gems">
+          <span class="crystal-glow"></span><span class="crystal">◆</span>
+          <span class="mine-label">TAP TO MINE</span>
+        </button>
+        <div class="mine-power">+<span id="clickPower">1</span> gems per strike</div>
+      </div>
+    </section>
+
+    <section class="resource-bar panel">
+      <div class="main-currency"><span class="mini-gem">◆</span><div><strong id="gems">0</strong><span>GEMS</span></div></div>
+      <div class="rate"><span>PRODUCTION</span><strong><span id="gps">0</span> / sec</strong></div>
+      <div class="level-wrap"><div class="level-head"><span>Cavern Level <b id="level">1</b></span><span id="levelProgressText">0 / 100</span></div><div class="progress"><i id="levelProgress"></i></div></div>
+    </section>
+
+    <nav class="tabs" aria-label="Game sections">
+      <button class="tab active" data-tab="mine">Mine</button><button class="tab" data-tab="workers">Workers</button><button class="tab" data-tab="upgrades">Upgrades</button><button class="tab" data-tab="achievements">Achievements <span id="achievementDot" class="notification hidden"></span></button><button class="tab" data-tab="ascend">Ascend</button>
+    </nav>
+
+    <section id="mine" class="tab-panel active">
+      <div class="section-title"><div><span class="eyebrow">DISCOVERIES</span><h2>Gem Collection</h2></div><span id="collectionCount">1 / 8 found</span></div>
+      <div id="gemCollection" class="gem-grid"></div>
+      <div class="depth-card panel">
+        <div class="depth-icon">⌄</div><div class="depth-info"><span>NEXT EXPEDITION</span><strong id="nextCavern">Amethyst Hollow</strong><small id="unlockText">Reach cavern level 5</small></div>
+        <div class="depth-progress"><div class="progress"><i id="cavernProgress"></i></div></div>
+      </div>
+    </section>
+
+    <section id="workers" class="tab-panel"><div class="section-title"><div><span class="eyebrow">AUTOMATION</span><h2>Mining Crew</h2></div><span>Earn gems while you’re away</span></div><div id="workerList" class="shop-grid"></div></section>
+    <section id="upgrades" class="tab-panel"><div class="section-title"><div><span class="eyebrow">RESEARCH</span><h2>Power Up</h2></div><span>Permanent for this expedition</span></div><div id="upgradeList" class="shop-grid"></div></section>
+    <section id="achievements" class="tab-panel"><div class="section-title"><div><span class="eyebrow">MILESTONES</span><h2>Achievements</h2></div><span id="achievementCount">0 / 8 complete</span></div><div id="achievementList" class="achievement-grid"></div></section>
+    <section id="ascend" class="tab-panel"><div class="ascend-card panel"><span class="ascend-orbit">✦</span><div class="eyebrow">DEEPER THAN BEFORE</div><h2>Crystal Ascension</h2><p>Collapse your mine and begin again with permanent Prismatic Shards. Every shard boosts all gem production by 10% forever.</p><div class="ascend-math"><div><span>You will receive</span><strong><b id="shardsGain">0</b> ✦</strong></div><div><span>Current permanent boost</span><strong id="ascendBoost">+0%</strong></div></div><button id="ascendBtn" class="primary-button" disabled>Ascend at 1M lifetime gems</button><small>Workers, upgrades, gems, and cavern level will reset.</small></div></section>
+  </main>
+
+  <dialog id="settingsModal"><form method="dialog"><div class="modal-head"><h2>Settings</h2><button class="icon-button">×</button></div><label class="setting-row"><span><b>Compact numbers</b><small>Display 1,000 as 1K</small></span><input id="compactToggle" type="checkbox" checked></label><label class="setting-row"><span><b>Reduced motion</b><small>Limit visual effects</small></span><input id="motionToggle" type="checkbox"></label><button type="button" id="exportBtn" class="secondary-button">Export save</button><button type="button" id="importBtn" class="secondary-button">Import save</button><button type="button" id="resetBtn" class="danger-button">Reset all progress</button></form></dialog>
+  <footer>Idle Gems · Your progress saves automatically</footer>
+  <script src="game.js"></script>
+</body>
+</html>
