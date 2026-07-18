@@ -14,7 +14,8 @@ Each currency has its own collection method, generators, and upgrades. Higher cu
 
 Every level from 1 through 30 unlocks new content. Leveling itself does not increase XP production. Players must purchase Training upgrades and develop Energy, Knowledge, Crystal, and Essence mechanics to overcome each 100,000× requirement jump.
 
-Level 2 immediately unlocks a free, one-time 1,000× XP Overclock for the current run. Training Upgrades are displayed directly below the XP button so the route to the next level is always visible.
+Level 2 immediately unlocks a free, one-time 10× XP Overclock for the current run. Training Upgrades are displayed directly below the XP button so the route to the next level is always visible.
+Level pacing is tuned so early levels take roughly 2–5 minutes of active play. Later levels take longer until the player develops the newly unlocked currency mechanics.
 
 ## Run
 
