@@ -53,7 +53,14 @@
     </section>
 
     <nav class="tabs" aria-label="Game sections">
-      <button class="tab active" data-tab="mine">Mine</button><button class="tab" data-tab="workers">Workers</button><button class="tab" data-tab="upgrades">Upgrades</button><button class="tab" data-tab="achievements">Achievements <span id="achievementDot" class="notification hidden"></span></button><button class="tab" data-tab="ascend">Ascend</button>
+      <div class="nav-label">EXPEDITION</div>
+      <button class="tab active" data-tab="mine"><span class="tab-icon">◆</span><span class="tab-copy"><b>Mine</b><small>Collection & caverns</small></span></button>
+      <button class="tab" data-tab="workers"><span class="tab-icon">⛏</span><span class="tab-copy"><b>Workers</b><small>Automate production</small></span></button>
+      <button class="tab" data-tab="upgrades"><span class="tab-icon">⌁</span><span class="tab-copy"><b>Upgrades</b><small>Boost your mine</small></span></button>
+      <div class="nav-label nav-label-second">PROGRESS</div>
+      <button class="tab" data-tab="achievements"><span class="tab-icon">✓</span><span class="tab-copy"><b>Achievements <span id="achievementDot" class="notification hidden"></span></b><small>Milestones & rewards</small></span></button>
+      <button class="tab ascend-tab" data-tab="ascend"><span class="tab-icon">✦</span><span class="tab-copy"><b>Ascend</b><small>Restart even stronger</small></span></button>
+      <div class="rail-tip"><span>TIP</span><p>Hold a combo to mine up to 5× faster.</p></div>
     </nav>
 
     <section id="mine" class="tab-panel active">
