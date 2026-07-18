@@ -2,7 +2,7 @@ const SAVE_KEY='levelUpMechanicsBalanceV3';
 const fresh=()=>({level:1,xp:0,lifetimeXp:0,runXp:0,totalClicks:0,highestLevel:1,energy:0,knowledge:0,crystals:0,totalCrystals:0,essence:0,trainingUp:{},energyUp:{},knowledgeUp:{},crystalUp:{},essenceUp:{},playSeconds:0,lastSave:Date.now(),compact:true,reducedMotion:false});
 const layers={
  training:[
-  {id:'power',name:'Power Practice',icon:'▲',desc:'Multiply click XP by 100×',base:10,scale:100,currency:'xp',unlock:1},
+  {id:'power',name:'Power Practice',icon:'▲',desc:'Multiply click XP by 100× · price scales 1,000×',base:10,scale:1000,currency:'xp',unlock:1},
   {id:'discipline',name:'Level 2 Overclock',icon:'×',desc:'Activate a 1,000× XP overclock for this run',base:0,scale:1,currency:'xp',unlock:2,max:1},
   {id:'trainer',name:'Auto Trainer',icon:'»',desc:'Generate 10% of click XP/sec',base:1e6,scale:1e5,currency:'xp',unlock:4},
   {id:'breakthrough',name:'Breakthrough',icon:'✦',desc:'Multiply all XP by 100,000×',base:1e15,scale:1e10,currency:'xp',unlock:6}],
