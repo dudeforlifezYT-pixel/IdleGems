@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="usability.css" />
 </head>
 <body>
   <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
@@ -41,14 +42,14 @@
           <span class="crystal-glow"></span><span class="crystal">◆</span>
           <span class="mine-label">TAP TO MINE</span>
         </button>
-        <div class="mine-power">+<span id="clickPower">1</span> gems per strike</div>
+        <div class="mine-power">+<span id="clickPower">1</span> gems per strike <span class="key-hint">SPACE</span></div>
       </div>
     </section>
 
-    <section class="resource-bar panel">
+    <section class="resource-bar panel" aria-live="polite">
       <div class="main-currency"><span class="mini-gem">◆</span><div><strong id="gems">0</strong><span>GEMS</span></div></div>
       <div class="rate"><span>PRODUCTION</span><strong><span id="gps">0</span> / sec</strong></div>
-      <div class="level-wrap"><div class="level-head"><span>Cavern Level <b id="level">1</b></span><span id="levelProgressText">0 / 100</span></div><div class="progress"><i id="levelProgress"></i></div></div>
+      <div class="level-wrap"><div class="level-head"><span>Cavern Level <b id="level">1</b> · <b id="discoveryBonus">+0%</b> discovery boost</span><span id="levelProgressText">0 / 60</span></div><div class="progress"><i id="levelProgress"></i></div></div>
     </section>
 
     <nav class="tabs" aria-label="Game sections">
@@ -64,10 +65,10 @@
       </div>
     </section>
 
-    <section id="workers" class="tab-panel"><div class="section-title"><div><span class="eyebrow">AUTOMATION</span><h2>Mining Crew</h2></div><span>Earn gems while you’re away</span></div><div id="workerList" class="shop-grid"></div></section>
-    <section id="upgrades" class="tab-panel"><div class="section-title"><div><span class="eyebrow">RESEARCH</span><h2>Power Up</h2></div><span>Permanent for this expedition</span></div><div id="upgradeList" class="shop-grid"></div></section>
+    <section id="workers" class="tab-panel"><div class="section-title shop-title"><div><span class="eyebrow">AUTOMATION</span><h2>Mining Crew</h2></div><div class="buy-modes" aria-label="Purchase quantity"><span>BUY</span><button class="buy-mode active" data-mode="1">1</button><button class="buy-mode" data-mode="10">10</button><button class="buy-mode" data-mode="max">MAX</button></div></div><div id="workerList" class="shop-grid"></div></section>
+    <section id="upgrades" class="tab-panel"><div class="section-title shop-title"><div><span class="eyebrow">RESEARCH</span><h2>Power Up</h2></div><div class="buy-modes" aria-label="Purchase quantity"><span>BUY</span><button class="buy-mode active" data-mode="1">1</button><button class="buy-mode" data-mode="10">10</button><button class="buy-mode" data-mode="max">MAX</button></div></div><div id="upgradeList" class="shop-grid"></div></section>
     <section id="achievements" class="tab-panel"><div class="section-title"><div><span class="eyebrow">MILESTONES</span><h2>Achievements</h2></div><span id="achievementCount">0 / 8 complete</span></div><div id="achievementList" class="achievement-grid"></div></section>
-    <section id="ascend" class="tab-panel"><div class="ascend-card panel"><span class="ascend-orbit">✦</span><div class="eyebrow">DEEPER THAN BEFORE</div><h2>Crystal Ascension</h2><p>Collapse your mine and begin again with permanent Prismatic Shards. Every shard boosts all gem production by 10% forever.</p><div class="ascend-math"><div><span>You will receive</span><strong><b id="shardsGain">0</b> ✦</strong></div><div><span>Current permanent boost</span><strong id="ascendBoost">+0%</strong></div></div><button id="ascendBtn" class="primary-button" disabled>Ascend at 1M lifetime gems</button><small>Workers, upgrades, gems, and cavern level will reset.</small></div></section>
+    <section id="ascend" class="tab-panel"><div class="ascend-card panel"><span class="ascend-orbit">✦</span><div class="eyebrow">DEEPER THAN BEFORE</div><h2>Crystal Ascension</h2><p>Collapse your mine and begin again with permanent Prismatic Shards. Every shard boosts all gem production by 12% forever.</p><div class="ascend-math"><div><span>You will receive</span><strong><b id="shardsGain">0</b> ✦</strong></div><div><span>Current permanent boost</span><strong id="ascendBoost">+0%</strong></div></div><button id="ascendBtn" class="primary-button" disabled>Ascend at 500K expedition gems</button><small>Workers, upgrades, gems, and cavern level will reset.</small></div></section>
   </main>
 
   <dialog id="settingsModal"><form method="dialog"><div class="modal-head"><h2>Settings</h2><button class="icon-button">×</button></div><label class="setting-row"><span><b>Compact numbers</b><small>Display 1,000 as 1K</small></span><input id="compactToggle" type="checkbox" checked></label><label class="setting-row"><span><b>Reduced motion</b><small>Limit visual effects</small></span><input id="motionToggle" type="checkbox"></label><button type="button" id="exportBtn" class="secondary-button">Export save</button><button type="button" id="importBtn" class="secondary-button">Import save</button><button type="button" id="resetBtn" class="danger-button">Reset all progress</button></form></dialog>
