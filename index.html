@@ -51,12 +51,13 @@
           <p>Click the button or press <kbd>SPACE</kbd></p>
         </div>
 
+        <div class="panel training-upgrades-panel"><div class="panel-head"><div><span class="overline">BUILD YOUR POWER</span><h2>Training Upgrades</h2></div><span>Required to reach the next level</span></div><div id="trainingGrid" class="card-grid"></div></div>
+
         <div class="lower-grid">
           <div class="panel recent-panel"><div class="panel-head"><div><span class="overline">PROGRESSION</span><h2>Level Rewards</h2></div></div><div id="rewardTrack" class="reward-track"></div></div>
           <div class="panel stats-panel"><div class="panel-head"><div><span class="overline">SESSION</span><h2>Statistics</h2></div></div><div class="stats-list"><div><span>Total clicks</span><b id="totalClicks">0</b></div><div><span>Critical clicks</span><b id="criticalClicks">0</b></div><div><span>Time played</span><b id="timePlayed">0m</b></div><div><span>Highest level</span><b id="highestLevel">1</b></div></div></div>
         </div>
         <div class="panel level-content-panel"><div class="panel-head"><div><span class="overline">EVERY LEVEL CHANGES THE GAME</span><h2>Level Unlocks</h2></div><span id="contentCount">1 unlocked</span></div><div id="levelContentGrid" class="level-content-grid"></div></div>
-        <div class="panel training-upgrades-panel"><div class="panel-head"><div><span class="overline">BUILD YOUR POWER</span><h2>Training Upgrades</h2></div><span>Purchased with current XP</span></div><div id="trainingGrid" class="card-grid"></div></div>
       </section>
 
       <section id="energy" class="page layer-page"><div class="layer-hero energy-theme"><div><span class="overline">RESOURCE LAYER I</span><h1>Energy</h1><p>Channel Energy manually, then build capacitors that generate it for you. Energy upgrades amplify XP.</p></div><div class="layer-balance"><small>ENERGY</small><strong><span id="energyAmount">0</span> ϟ</strong><span><b id="energyRate">0</b> / sec</span></div></div><button id="energyButton" class="collect-btn energy-btn"><small>CHANNEL</small><strong>+<span id="energyClick">1</span> ENERGY</strong></button><div id="energyGrid" class="card-grid"></div></section>
@@ -69,6 +70,6 @@
   <div id="levelModal" class="level-modal"><div><span>LEVEL UP</span><strong id="modalLevel">2</strong><p id="modalReward">Click power increased!</p></div></div>
   <div id="toast" class="toast"></div>
   <dialog id="settingsModal"><form method="dialog"><div class="dialog-head"><h2>Settings</h2><button>×</button></div><label><span><b>Compact numbers</b><small>Show 1,000 as 1K</small></span><input id="compactToggle" type="checkbox" checked></label><label><span><b>Reduced motion</b><small>Limit visual effects</small></span><input id="motionToggle" type="checkbox"></label><button type="button" id="exportBtn" class="dialog-btn">Export save</button><button type="button" id="importBtn" class="dialog-btn">Import save</button><button type="button" id="resetBtn" class="dialog-btn danger">Reset progress</button></form></dialog>
-  <script src="game.js?v=mechanics-balance-1"></script>
+  <script src="game.js?v=level2-overclock-fix" ></script>
 </body>
 </html>
