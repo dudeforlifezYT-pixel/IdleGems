@@ -12,7 +12,7 @@ A layered browser incremental game where every click earns XP. Level 1 begins at
 
 Each currency has its own collection method, generators, and upgrades. Higher currencies multiply the production of lower layers. The game also includes ranks, statistics, offline progress, automatic saving, and save export/import.
 
-Every level from 1 through 30 unlocks new content. Rewards include production overclocks as large as 100,000×, automatic trainers, improved currency conversion, reset bonuses, offline boosts, new generators, and the four currency layers.
+Every level from 1 through 30 unlocks new content. Leveling itself does not increase XP production. Players must purchase Training upgrades and develop Energy, Knowledge, Crystal, and Essence mechanics to overcome each 100,000× requirement jump.
 
 ## Run
 
