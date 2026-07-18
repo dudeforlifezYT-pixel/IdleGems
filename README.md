@@ -1,6 +1,6 @@
 # Level Up
 
-A layered browser incremental game where every click earns XP. Level requirements begin at exactly **5 XP** and scale steeply while entirely new currencies open up.
+A layered browser incremental game where every click earns XP. Level 1 begins at exactly **5 XP**, and every following level costs approximately **100,000× more XP**.
 
 ## Progression
 
@@ -11,6 +11,8 @@ A layered browser incremental game where every click earns XP. Level requirement
 - Level 25: Essence — collapse lower layers for rule-changing upgrades
 
 Each currency has its own collection method, generators, and upgrades. Higher currencies multiply the production of lower layers. The game also includes ranks, statistics, offline progress, automatic saving, and save export/import.
+
+Every level from 1 through 30 unlocks new content. Rewards include production overclocks as large as 100,000×, automatic trainers, improved currency conversion, reset bonuses, offline boosts, new generators, and the four currency layers.
 
 ## Run
 
@@ -24,7 +26,7 @@ Then visit `http://localhost:8080`.
 
 ## Galaxy.click
 
-Upload a ZIP containing `index.html`, `styles.css`, `layers.css`, and `game.js`. Use `index.html` as the entry point.
+Upload a ZIP containing `index.html`, `styles.css`, `layers.css`, `level-content.css`, and `game.js`. Use `index.html` as the entry point.
 
 ## License
 
