@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=level-up-1" />
+  <link rel="stylesheet" href="layers.css?v=currency-layers-1" />
 </head>
 <body>
   <div class="noise"></div><div class="glow"></div>
@@ -24,10 +25,10 @@
       <div class="profile"><div class="level-ring"><span>LV.</span><b id="sideLevel">1</b></div><div><small>CURRENT RANK</small><strong id="rankName">Rookie</strong></div></div>
       <nav>
         <button class="nav-btn active" data-page="train"><i>⌁</i><span><b>Train</b><small>Earn XP & level up</small></span></button>
-        <button class="nav-btn locked" data-page="skills" data-unlock="3"><i>✦</i><span><b>Skills</b><small id="skillsNavText">Unlocks at level 3</small></span></button>
-        <button class="nav-btn locked" data-page="automation" data-unlock="5"><i>»</i><span><b>Automation</b><small id="automationNavText">Unlocks at level 5</small></span></button>
-        <button class="nav-btn locked" data-page="challenges" data-unlock="10"><i>◆</i><span><b>Challenges</b><small id="challengesNavText">Unlocks at level 10</small></span></button>
-        <button class="nav-btn locked" data-page="prestige" data-unlock="20"><i>∞</i><span><b>Prestige</b><small id="prestigeNavText">Unlocks at level 20</small></span></button>
+        <button class="nav-btn locked" data-page="energy" data-unlock="3"><i>ϟ</i><span><b>Energy</b><small>Unlocks at level 3</small></span></button>
+        <button class="nav-btn locked" data-page="knowledge" data-unlock="8"><i>◫</i><span><b>Knowledge</b><small>Unlocks at level 8</small></span></button>
+        <button class="nav-btn locked" data-page="crystals" data-unlock="15"><i>◆</i><span><b>Crystals</b><small>Unlocks at level 15</small></span></button>
+        <button class="nav-btn locked" data-page="essence" data-unlock="25"><i>∞</i><span><b>Essence</b><small>Unlocks at level 25</small></span></button>
       </nav>
       <div class="next-unlock"><small>NEXT FEATURE</small><strong id="nextUnlockName">Skills</strong><span id="nextUnlockLevel">Reach level 3</span><div class="mini-progress"><i id="unlockProgress"></i></div></div>
     </aside>
@@ -53,10 +54,10 @@
         </div>
       </section>
 
-      <section id="skills" class="page"><div class="page-heading"><span class="overline">SPEND XP TO GROW</span><h1>Skills</h1><p>Purchased skills reset on prestige, but their power compounds fast.</p></div><div id="skillGrid" class="card-grid"></div></section>
-      <section id="automation" class="page"><div class="page-heading"><span class="overline">PROGRESS WHILE IDLE</span><h1>Automation</h1><p>Build a training system that earns XP every second—even while you are away.</p></div><div id="automationGrid" class="card-grid"></div></section>
-      <section id="challenges" class="page"><div class="page-heading"><span class="overline">PERMANENT REWARDS</span><h1>Challenges</h1><p>Complete milestones for permanent bonuses that survive prestige.</p></div><div id="challengeGrid" class="challenge-grid"></div></section>
-      <section id="prestige" class="page"><div class="prestige-panel"><div class="prestige-symbol">∞</div><span class="overline">BREAK YOUR LIMIT</span><h1>Prestige</h1><p>Reset your level, XP, skills, and automation to earn permanent Potential. Each Potential point multiplies all XP by 25%.</p><div class="prestige-info"><div><small>YOU WILL EARN</small><strong><span id="potentialGain">0</span> ◈</strong></div><div><small>CURRENT BOOST</small><strong id="potentialBoost">×1.00</strong></div></div><button id="prestigeBtn" disabled>Reach level 20 to prestige</button><small class="warning">Challenges, achievements, and lifetime stats are kept.</small></div></section>
+      <section id="energy" class="page layer-page"><div class="layer-hero energy-theme"><div><span class="overline">RESOURCE LAYER I</span><h1>Energy</h1><p>Channel Energy manually, then build capacitors that generate it for you. Energy upgrades amplify XP.</p></div><div class="layer-balance"><small>ENERGY</small><strong><span id="energyAmount">0</span> ϟ</strong><span><b id="energyRate">0</b> / sec</span></div></div><button id="energyButton" class="collect-btn energy-btn"><small>CHANNEL</small><strong>+<span id="energyClick">1</span> ENERGY</strong></button><div id="energyGrid" class="card-grid"></div></section>
+      <section id="knowledge" class="page layer-page"><div class="layer-hero knowledge-theme"><div><span class="overline">RESOURCE LAYER II</span><h1>Knowledge</h1><p>Convert accumulated Energy into Knowledge. Knowledge upgrades strengthen every resource below it.</p></div><div class="layer-balance"><small>KNOWLEDGE</small><strong><span id="knowledgeAmount">0</span> ◫</strong><span><b id="knowledgeRate">0</b> / sec</span></div></div><button id="studyButton" class="collect-btn knowledge-btn"><small>STUDY</small><strong id="studyText">Spend 100 Energy → 1 Knowledge</strong></button><div id="knowledgeGrid" class="card-grid"></div></section>
+      <section id="crystals" class="page layer-page"><div class="layer-hero crystal-theme"><div><span class="overline">RESOURCE LAYER III</span><h1>Crystals</h1><p>Condense your run into Crystals. This resets XP, levels, and Energy, but Crystal upgrades are permanent.</p></div><div class="layer-balance"><small>CRYSTALS</small><strong><span id="crystalAmount">0</span> ◆</strong><span>Permanent layer</span></div></div><button id="crystalButton" class="collect-btn crystal-btn" disabled><small>CRYSTALLIZE THIS RUN</small><strong id="crystalGainText">Reach 50K run XP</strong></button><div id="crystalGrid" class="card-grid"></div></section>
+      <section id="essence" class="page"><div class="prestige-panel"><div class="prestige-symbol">∞</div><span class="overline">RESOURCE LAYER IV</span><h1>Essence</h1><p>Collapse every lower layer into permanent Essence. Essence upgrades transform the rules of the entire game.</p><div class="prestige-info"><div><small>YOU WILL COLLECT</small><strong><span id="essenceGain">0</span> ∞</strong></div><div><small>CURRENT ESSENCE</small><strong id="essenceAmount">0</strong></div></div><button id="essenceButton" disabled>Reach level 25 to collect Essence</button><small class="warning">XP, Energy, Knowledge, and Crystals reset. Essence upgrades remain.</small></div><div id="essenceGrid" class="card-grid"></div></section>
     </section>
   </main>
 
