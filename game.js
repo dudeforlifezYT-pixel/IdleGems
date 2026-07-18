@@ -1,19 +1,19 @@
-const SAVE_KEY='levelUpMechanicsBalanceV3';
+const SAVE_KEY='levelUpMinutesBalanceV4';
 const fresh=()=>({level:1,xp:0,lifetimeXp:0,runXp:0,totalClicks:0,highestLevel:1,energy:0,knowledge:0,crystals:0,totalCrystals:0,essence:0,trainingUp:{},energyUp:{},knowledgeUp:{},crystalUp:{},essenceUp:{},playSeconds:0,lastSave:Date.now(),compact:true,reducedMotion:false});
 const layers={
  training:[
-  {id:'power',name:'Power Practice',icon:'▲',desc:'Multiply click XP by 100× · price scales 1,000×',base:10,scale:1000,currency:'xp',unlock:1},
-  {id:'discipline',name:'Level 2 Overclock',icon:'×',desc:'Activate a 1,000× XP overclock for this run',base:0,scale:1,currency:'xp',unlock:2,max:1},
+  {id:'power',name:'Power Practice',icon:'▲',desc:'Multiply click XP by 100× · price scales 1,000×',base:1000,scale:1000,currency:'xp',unlock:1},
+  {id:'discipline',name:'Level 2 Overclock',icon:'×',desc:'Activate a 10× XP overclock for this run',base:0,scale:1,currency:'xp',unlock:2,max:1},
   {id:'trainer',name:'Auto Trainer',icon:'»',desc:'Generate 10% of click XP/sec',base:1e6,scale:1e5,currency:'xp',unlock:4},
-  {id:'breakthrough',name:'Breakthrough',icon:'✦',desc:'Multiply all XP by 100,000×',base:1e15,scale:1e10,currency:'xp',unlock:6}],
+  {id:'breakthrough',name:'Breakthrough',icon:'✦',desc:'Multiply all XP by 1,000×',base:1e15,scale:1e10,currency:'xp',unlock:6}],
  energy:[
   {id:'channel',name:'Stronger Channel',icon:'ϟ',desc:'+1 Energy per channel',base:8,scale:1.8,currency:'energy'},
   {id:'battery',name:'Energy Battery',icon:'▰',desc:'+0.25 automatic Energy/sec',base:20,scale:1.9,currency:'energy'},
-  {id:'surge',name:'XP Surge',icon:'▲',desc:'Multiply all XP by 100,000×',base:35,scale:2.5,currency:'energy'},
+  {id:'surge',name:'XP Surge',icon:'▲',desc:'Multiply all XP by 1,000×',base:500,scale:4,currency:'energy'},
   {id:'engine',name:'Training Engine',icon:'»',desc:'Generate 20% of click XP/sec',base:90,scale:2.8,currency:'energy'}],
  knowledge:[
-  {id:'memory',name:'Perfect Memory',icon:'◫',desc:'Multiply all XP by 100,000×',base:2,scale:2.4,currency:'knowledge'},
-  {id:'theory',name:'Energy Theory',icon:'ϟ',desc:'Multiply all Energy gain by 1,000×',base:4,scale:2.7,currency:'knowledge'},
+  {id:'memory',name:'Perfect Memory',icon:'◫',desc:'Multiply all XP by 1,000×',base:25,scale:5,currency:'knowledge'},
+  {id:'theory',name:'Energy Theory',icon:'ϟ',desc:'Multiply all Energy gain by 100×',base:10,scale:4,currency:'knowledge'},
   {id:'research',name:'Passive Research',icon:'⌁',desc:'+0.05 Knowledge/sec',base:8,scale:3,currency:'knowledge'},
   {id:'formula',name:'Conversion Formula',icon:'×',desc:'Double Knowledge from studying',base:15,scale:3.2,currency:'knowledge'}],
  crystal:[
@@ -29,7 +29,7 @@ const layers={
 };
 const unlocks=[{level:3,name:'Energy',page:'energy'},{level:8,name:'Knowledge',page:'knowledge'},{level:15,name:'Crystals',page:'crystals'},{level:25,name:'Essence',page:'essence'}];
 const levelContent=[
- {level:1,name:'XP Button',icon:'XP',effect:'Click to begin gaining XP'}, {level:2,name:'Overclock',icon:'×',effect:'Unlock a free 1,000× XP Overclock',type:'unlock'},
+ {level:1,name:'XP Button',icon:'XP',effect:'Click to begin gaining XP'}, {level:2,name:'Overclock',icon:'×',effect:'Unlock a free 10× XP Overclock',type:'unlock'},
  {level:3,name:'Energy Layer',icon:'ϟ',effect:'Unlock the Energy currency'}, {level:4,name:'Auto Trainer',icon:'»',effect:'Gain 1% click XP every second',type:'autoXp',factor:.01},
  {level:5,name:'Voltage',icon:'ϟ',effect:'Energy production ×100,000',type:'energy',factor:1e5}, {level:6,name:'Hyperclick',icon:'▲',effect:'XP production ×100,000',type:'xp',factor:1e5},
  {level:7,name:'Compression',icon:'◈',effect:'All production ×1,000',type:'all',factor:1e3}, {level:8,name:'Knowledge Layer',icon:'◫',effect:'Unlock the Knowledge currency'},
@@ -55,10 +55,10 @@ function contentMult(type){return levelContent.filter(c=>c.level<=state.highestL
 function contentSum(type){return levelContent.filter(c=>c.level<=state.highestLevel&&c.type===type).reduce((n,c)=>n+(c.factor||0),0)}
 function essenceMult(){return Math.pow(5,up('essence','eternal'))*Math.pow(3,up('essence','overflow'))}
 function crystalMult(){return Math.pow(3,up('crystal','facet'))*Math.pow(Math.max(1,state.level),up('crystal','core'))}
-function xpMult(){return Math.pow(1e3,up('training','discipline'))*Math.pow(1e5,up('training','breakthrough'))*Math.pow(1e5,up('energy','surge'))*Math.pow(1e5,up('knowledge','memory'))*crystalMult()*essenceMult()}
+function xpMult(){return Math.pow(10,up('training','discipline'))*Math.pow(1e3,up('training','breakthrough'))*Math.pow(1e3,up('energy','surge'))*Math.pow(1e3,up('knowledge','memory'))*crystalMult()*essenceMult()}
 function clickPower(){return Math.pow(100,up('training','power'))*xpMult()}
-function energyClick(){return(1+up('energy','channel'))*Math.pow(1e3,up('knowledge','theory'))*crystalMult()*essenceMult()}
-function energyRate(){return up('energy','battery')*.25*Math.pow(1e3,up('knowledge','theory'))*crystalMult()*essenceMult()}
+function energyClick(){return(1+up('energy','channel'))*Math.pow(100,up('knowledge','theory'))*crystalMult()*essenceMult()}
+function energyRate(){return up('energy','battery')*.25*Math.pow(100,up('knowledge','theory'))*crystalMult()*essenceMult()}
 function knowledgeRate(){return up('knowledge','research')*.05*Math.pow(3,up('crystal','prism'))*essenceMult()}
 function xpRate(){return clickPower()*(up('training','trainer')*.1+up('energy','engine')*.2)}
 function studyGain(){return state.energy<100?0:Math.max(1,Math.floor(Math.pow(state.energy/100,.68)*Math.pow(2,up('knowledge','formula'))*Math.pow(3,up('crystal','prism'))*essenceMult()))}
@@ -71,7 +71,7 @@ function study(){const gain=studyGain();if(!gain)return;state.energy=0;state.kno
 function collectCrystals(){const gain=crystalGain();if(!gain||!confirm(`Crystallize this run for ${gain} Crystals? XP, levels, Energy, and Knowledge will reset.`))return;state.crystals+=gain;state.totalCrystals+=gain;resetLower('crystal');showPage('crystals');toast(`Collected ${gain} Crystals`);save();render()}
 function collectEssence(){const gain=essenceGain();if(!gain||!confirm(`Collapse all lower layers for ${gain} Essence?`))return;state.essence+=gain;resetLower('essence');showPage('essence');toast(`Collected ${gain} Essence`);save();render()}
 function resetLower(kind){const start=1+contentSum('start')+up('crystal','preserve')*2+up('essence','origin')*5;state.level=start;state.xp=0;state.runXp=0;state.energy=0;state.knowledge=0;state.trainingUp={};state.energyUp={};state.knowledgeUp={};if(kind==='essence'){state.crystals=0;state.totalCrystals=0;state.crystalUp={}}}
-function buy(layer,id){const item=layers[layer].find(i=>i.id===id),owned=up(layer,id),p=price(layer,item),currency=item.currency;if((item.max&&owned>=item.max)||state[currency]<p)return;state[currency]-=p;state[`${layer}Up`][id]=owned+1;render();save();if(item.id==='discipline')toast('Overclock activated — XP production is now 1,000× stronger!')}
+function buy(layer,id){const item=layers[layer].find(i=>i.id===id),owned=up(layer,id),p=price(layer,item),currency=item.currency;if((item.max&&owned>=item.max)||state[currency]<p)return;state[currency]-=p;state[`${layer}Up`][id]=owned+1;render();save();if(item.id==='discipline')toast('Overclock activated — XP production is now 10× stronger!')}
 function floatText(e,text,extra){if(state.reducedMotion)return;const f=document.createElement('span');f.className=`float-xp ${extra}`;f.textContent=text;f.style.left=`${e.clientX}px`;f.style.top=`${e.clientY}px`;document.body.appendChild(f);setTimeout(()=>f.remove(),850)}
 function levelUp(count){$('modalLevel').textContent=state.level;const reward=levelContent.find(u=>u.level===state.level);$('modalReward').textContent=reward?`${reward.name} unlocked — check Training Upgrades!`:`${count} levels gained`;$('levelModal').classList.add('show');clearTimeout(levelUp.timer);levelUp.timer=setTimeout(()=>$('levelModal').classList.remove('show'),1400);updateLocks();save()}
 function renderLayer(layer,container){$(container).innerHTML=layers[layer].map(item=>{const lvl=up(layer,item.id),p=price(layer,item),currency=item.currency,locked=item.unlock&&state.highestLevel<item.unlock,maxed=item.max&&lvl>=item.max,label=maxed?'ACTIVATED':p===0?'ACTIVATE FREE':'UPGRADE';return`<article class="upgrade-card ${locked?'locked':''} ${maxed?'maxed':''}"><div class="upgrade-icon">${locked?'?':item.icon}</div><div class="upgrade-copy"><strong>${locked?`Unlocks at level ${item.unlock}`:item.name}</strong><small>${locked?'Reach the required level to reveal this upgrade':item.desc}</small><em>${locked?'LOCKED':maxed?'ACTIVE':`Level ${lvl}`}</em></div><button class="buy-btn" data-layer="${layer}" data-upgrade="${item.id}" ${locked||maxed||state[currency]<p?'disabled':''}>${label}<span class="currency-cost">${maxed?'PERMANENT':p===0?'NO COST':`${fmt(p)} ${currency.toUpperCase()}`}</span></button></article>`}).join('')}
